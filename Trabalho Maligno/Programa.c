@@ -9,7 +9,7 @@ typedef enum {
 
 typedef struct no{
 
-    unsigned char caracter;
+    char byte;
     int frequencia;
     struct no *esq, *dir, *proximo;
     char codigo[20];
@@ -61,7 +61,7 @@ void preencher_lista(unsigned int tab[], Lista *lista){
 
             if(novo){ 
 
-                novo->caracter = i;
+                novo->byte = i;
                 novo->frequencia = tab[i];
                 novo->dir = NULL;
                 novo->esq = NULL;
@@ -105,7 +105,7 @@ No* montar_arvore(Lista *lista)
         
         if(novo){ 
                 
-                novo->caracter = '+'; 
+                novo->byte = '+'; 
 
                 novo->frequencia = primeiro->frequencia + segundo->frequencia; 
 
@@ -133,7 +133,7 @@ void montar_dicionario(No *raiz, char cod[], Lista *dicionario)
     {
         No *aux = dicionario->inicio;
 
-        if(aux->caracter == raiz->caracter)
+        if(aux->byte == raiz->byte)
         {
             strcpy(aux->codigo, cod);
         }
@@ -143,7 +143,7 @@ void montar_dicionario(No *raiz, char cod[], Lista *dicionario)
             {
                 aux = aux->proximo;
 
-                if(aux->caracter == raiz->caracter)
+                if(aux->byte == raiz->byte)
                 {
                     strcpy(aux->codigo, cod);
 
@@ -180,7 +180,7 @@ char* codifica(Lista *dicionario, char texto[])
 
         while (aux)
         {
-            if(aux->caracter == texto[i]) 
+            if(aux->byte == texto[i]) 
             {
                 temp[0] = aux->codigo;
                 temp[1] = '\0';
@@ -213,7 +213,7 @@ char* decodifica(char texto[], No *raiz)
 
         if(aux->esq == NULL && aux->dir == NULL)
         {
-            temp[0] = aux->caracter;
+            temp[0] = aux->byte;
             temp[1] = '\0';
             strcat(decodificado, temp);
             aux = raiz;
@@ -257,14 +257,14 @@ void operacaoCompactar()
     }
 
     int c;
-    char texto[2150] = "";
+    char decodificado[2150] = "";
     char temp[2];
 
     while((c = fgetc(arquivo)) != EOF)
     {
         temp[0] = c;
         temp[1] = '\0';
-        strcat(texto, temp);
+        strcat(decodificado, temp);
     }
 
     if((c == EOF) && (feof(arquivo) == 0) && (ferror(arquivo) != 0))
@@ -282,8 +282,8 @@ void operacaoCompactar()
 
     i = 0;
 
-    while(texto[i] != '\0') { 
-        tab[texto[i]]++;
+    while(decodificado[i] != '\0') { 
+        tab[decodificado[i]]++;
         i++;
     }
     
@@ -319,7 +319,7 @@ void operacaoCompactar()
 
     // ---------- PARTE 6: codifica ------------ 
 
-    char *codificado = codifica(&dicionario, texto);
+    char *codificado = codifica(&dicionario, decodificado);
 
     // ---------- PARTE 7: cria e escreve num novo arquivo ----------
 
