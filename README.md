@@ -5,9 +5,3 @@
   * Paulo Henrique Francisco Felipe Ra: 20150
   * Mateus de Sales Francisco Ra: 20732
   * Pedro Sakai Ra:20151
-
-* ### Parte realizada:
-  * - [X] Nada
-  * - [X] Nada 2
-  * - [ ] Nada 3
-  * - [X] Nada 4
